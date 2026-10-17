@@ -14,7 +14,7 @@
  <header>
  <h1>CS2623 Server-Side Programming</h1>
  </header>
-<!-- Step 1 Adding navigation links-->
+
  <nav id="top-nav">
  <a href="../SSP01/index.php">Home</a>
  <a href="../SSP02/SSP02.php">SSP02</a>
@@ -23,13 +23,11 @@
 </nav>
 
 <main>
-    <h1>CS2623 Server-Side Programming</h1>
-    <h2>Hello World (HTML)</h2>
-    <p>Hello, World!</p>
-    <h2>Hello World (PHP Testing)</h2>
-    <?php
-    echo htmlspecialchars("Hello, World!");
-    ?>
+ <p>Hello World (HTML)</p>
+ <?php echo htmlspecialchars('<p>Hello World (PHP
+Testing)</p>'); ?>
+ <!-- ↑ Note: htmlspecialchars() is required for all echoed
+output -->
 </main>
  <footer>
  <p>Disclaimer: Oklahoma City Community College does not
