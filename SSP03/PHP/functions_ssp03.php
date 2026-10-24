@@ -1,49 +1,52 @@
 <?php
-/**
- * functions_ssp03.php
- * 
- * This file contains the functions used in index.php for the CS-2623 Weekly Study Planner.
- * It includes functions to open and close the table, create table rows, and retrieve day details and times.
 
-*/ 
 declare(strict_types=1);
-
 /**
- * Table Open Function
-*/
+ * fn_tableOpen() - Opens a table with a caption.
+ * @param string $caption The caption displayed above the table.
+ * @return void
+ */
+
 function fn_tableOpen (string $caption) : void {
+
     echo '<table border="1" cellpadding="6" cellspacing="0">';
-    echo '<tr style="background-color:#1B2A6B;color:#FFFFFF;">';
-    echo ' <th colspan="3">';
+    echo '<caption style="background-color:#1B2A6B;color:#FFFFFF;">';
     echo htmlspecialchars($caption, ENT_QUOTES, 'UTF-8');
-    echo ' </th>';
-    echo '</tr>';
+    echo '</caption>';
     echo '<tr style="background-color:#006B7D;color:#FFFFFF;">';
     echo '<th>Day</th><th>Details</th><th>Time</th>';
-     echo '</tr>';
+    echo '</tr>';
 
 }
 /**
- * Table Close Function
-*/
+ * fn_tableClose() - Closes a table.
+ * @return void
+ */
 function fn_tableClose(): void {
  echo '</table>';
 }
-/**
- * Table Row Functions Current
- */
 
+/**
+ * fn_tableRowCurrent() - Outputs a table row for the current day.
+ * @param string $day The name of the day.
+ * @param string $details The scheduled activity or details.
+ * @param string $time The scheduled time.
+ * @return void
+ */
 function fn_tableRowCurrent(string $day, string $details, string $time):void 
 {
  echo '<tr style="background-color:#FFFF66;">';
  echo '<td>' . htmlspecialchars($day, ENT_QUOTES, 'UTF-8') . '</td>';
- echo '<td>' . htmlspecialchars($details, ENT_QUOTES, 'UTF-8') .
-'</td>';
+ echo '<td>' . htmlspecialchars($details, ENT_QUOTES, 'UTF-8') . '</td>';
  echo '<td>' . htmlspecialchars($time, ENT_QUOTES, 'UTF-8') . '</td>';
  echo '</tr>';
 }
 /**
- * Table Row Function
+ * fn_tableRow() - Outputs a table row for a non-current day.
+ * @param string $day The name of the day.
+ * @param string $details The scheduled activity or details.
+ * @param string $time The scheduled time.
+ * @return void
  */
 function fn_tableRow(string $day, string $details, string $time): void 
 {
@@ -53,9 +56,13 @@ function fn_tableRow(string $day, string $details, string $time): void
  echo '<td>' . htmlspecialchars($time, ENT_QUOTES, 'UTF-8') . '</td>';
  echo '</tr>';  
  }
+
 /**
- * Day Lookup Function
+ * fn_dayOfWeek() - Returns the name of the day of the week for a given day number.
+ * @param int $day_num The day number, from 1 (Monday) to 7 (Sunday).
+ * @return string The name of the day, or 'Unknown Day' for an invalid number.
  */
+
  function fn_dayOfWeek(int $day_num) : string 
  {
     if ($day_num === 1) {
@@ -76,8 +83,11 @@ function fn_tableRow(string $day, string $details, string $time): void
         return 'Unknown Day';
     }
  }
-/**
- *function Day details using switch statement
+
+ /**
+ * fn_dayDetails() - Returns the details for a given day number.
+ * @param int $day_num The day number, from 1 to 7.
+ * @return string The activity details, or 'No schedule' for an invalid number.
  */
  function fn_dayDetails(int $day_num) : string
  {
@@ -93,9 +103,11 @@ function fn_tableRow(string $day, string $details, string $time): void
 
     }
  }
-/*
- * function Day time using if/elseif statement with || operator
-*/
+/**
+ * fn_dayTime() - Returns the time for a given day number.
+ * @param int $day_num The day number from 1 to 7.
+ * @return string The scheduled time, or 'TBD' for an invalid number.
+ */
  function fn_dayTime(int $day_num) : string
  {  if ($day_num === 1 || $day_num === 3) return '9:00 AM – 10:20 AM';
     elseif ($day_num === 2 || $day_num === 4) return '1:00 PM – 2:50 PM';
