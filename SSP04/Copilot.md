@@ -1,0 +1,2 @@
+SSP04 Asking Copilot "What is the difference between htmlspecialchars and htmlentities in PHP?"
+                     Answer: htmlspecialchars() converts characters with special meaning like &, <, >. htmlentities() also converts those characters but also converts have named or numeric HTML entities, like é as &eacute;

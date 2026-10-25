@@ -4,13 +4,11 @@ declare(strict_types=1);
 //Original String
 $description = "Michale Jacksons Thriller sold roughly 70000000 copies worldwide, making around 130000000 dollars in revenue.";
 
-
-
 // Replace a word
 $replaceOutput = str_replace("Thriller", "Bad", $description);
 
-// Check whether a keyword exists
-$containsOutput = str_contains($description, "Jackson");
+// Check whether the description contains "PHP"
+$containsOutput = str_contains($description, "PHP");
 
 // Convert to lowercase and uppercase
 $lowercaseOutput = strtolower($description);
@@ -68,7 +66,7 @@ $substringOutput = substr($description, 0, 30);
         </tr>
         <tr>
             <td>str_contains()</td>
-            <td>"Jackson"</td>
+            <td>"PHP"</td>
             <td><?php echo $containsOutput ? 'true' : 'false'; ?></td>
         </tr>
         <tr>
