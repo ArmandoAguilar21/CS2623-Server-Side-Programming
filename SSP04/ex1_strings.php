@@ -35,12 +35,12 @@ $substringOutput = substr($description, 0, 30);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SSP04 - String Functions</title>
+    <title>SSP04 — String Functions & Date/Time</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <header>
-        <h1>SSP04 — String Functions & Date/Time</h1>
+        <h1>SSP04 - String Functions</h1>
     </header>
 
     <main>
