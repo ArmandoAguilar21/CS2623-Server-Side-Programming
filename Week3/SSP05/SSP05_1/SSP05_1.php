@@ -2,31 +2,41 @@
 declare(strict_types=1);
 
 $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD') ?? 'GET';
+
 if ($method === 'POST') {
- // Read and validate form data
- $first = filter_input(INPUT_POST, 'first_name') ?? '';
- $last = filter_input(INPUT_POST, 'last_name') ?? '';
+    $first = trim(filter_input(INPUT_POST, 'first_name', FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR) ?: '');
+    $last = trim(filter_input(INPUT_POST, 'last_name', FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR) ?: '');
 
- //Validate email and age with appropriate filters
- $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) ?? '';
- if ($email === false || $email === null) {
-    $email_error = "Invalid email address";
-     $email = ''; } 
-     else 
-        { $email_error = '';
-      }
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL, FILTER_REQUIRE_SCALAR);
+    if ($email === false || $email === null) {
+        $email_error = 'Please enter a valid email address.';
+        $email = '';
+    } else {
+        $email_error = '';
+    }
 
-$age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT);
-if ($age === false || $age === null) {
-    $age_error = "Please enter a valid whole number for age.";
-    $age = 0;
-} else {
-    $age_error = '';
-}
+    $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT, [
+        'flags' => FILTER_REQUIRE_SCALAR,
+        'options' => ['min_range' => 0],
+    ]);
+    if ($age === false || $age === null) {
+        $age_error = 'Please enter a valid whole number for age.';
+        $age = 0;
+    } else {
+        $age_error = '';
+    }
 
- $gender = filter_input(INPUT_POST, 'gender') ?? 'not specified';
- $country= filter_input(INPUT_POST, 'country') ?? '';
- $comments = filter_input(INPUT_POST, 'comments') ?? '';
+    $gender = filter_input(INPUT_POST, 'gender', FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR) ?: 'not specified';
+    if (!in_array($gender, ['Female', 'Male', 'Other'], true)) {
+        $gender = 'not specified';
+    }
+
+    $country = filter_input(INPUT_POST, 'country', FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR) ?: '';
+    if (!in_array($country, ['', 'United States', 'Canada', 'United Kingdom', 'Other'], true)) {
+        $country = '';
+    }
+
+    $comments = filter_input(INPUT_POST, 'comments', FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR) ?: '';
 }
 ?>
 
