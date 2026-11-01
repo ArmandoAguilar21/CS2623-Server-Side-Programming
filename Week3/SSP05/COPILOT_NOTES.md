@@ -11,6 +11,9 @@ Original Response: What Copilot Informed: `$_POST` gives you the values a user s
 
 Simplified: $_POST gives you form values. filter_input() gets and can check or clean one value. Before displaying submitted text on a webpage, use htmlspecialchars().
 
+Added ??[] at the end of $options = filter input()
+
+
 
 
  
