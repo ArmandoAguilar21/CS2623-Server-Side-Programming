@@ -2,6 +2,8 @@
 declare(strict_types=1);
 $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD') ?? 'GET';
 if ($method === 'POST') {
+    //Debugging: Display the contents of the $_POST array for debugging purposes.
+    echo "<pre>DEBUG POST: " . print_r($_POST, true) . "</pre>";
  $cust_name = filter_input(INPUT_POST, 'cust_name') ?? '';
  $product = filter_input(INPUT_POST, 'product') ?? '';
  $quantity = filter_input(INPUT_POST, 'quantity',
