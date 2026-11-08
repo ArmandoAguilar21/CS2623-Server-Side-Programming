@@ -1,12 +1,8 @@
 <?php 
 
 declare(strict_types=1);
-
-
-$fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
+$fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape'];
  // sort $fruits alphabetically without changing the original array
-
-
 $sortedFruits = $fruits;
 sort($sortedFruits);
 
@@ -70,7 +66,7 @@ $catalog = [['id' => 1, 'name' => 'Apple', 'price' => 1.29],
  <li><?= htmlspecialchars($f, ENT_QUOTES, 'UTF-8') ?></li>
 <?php endforeach; ?>
 </ul>
-<h2>Filtered List (Shorter Than 6 Characters)</h2>
+<h2>Filtered List (No fruits lower than 6 Characters)</h2>
 <ul>
 <?php foreach ($filtered as $f): ?>
     <li><?= htmlspecialchars($f, ENT_QUOTES, 'UTF-8') ?></li>
