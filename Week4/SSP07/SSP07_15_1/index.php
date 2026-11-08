@@ -8,9 +8,10 @@ function validateContact(array $data): array {
  $errors[] = 'Invalid email address.';
  }
  // URL — use filter_var, NOT a custom regex
- if (!filter_var($data['url'] ?? '', FILTER_VALIDATE_URL)) { 
-    $errors[] = 'Invalid URL.';
- }
+$url = $data['url'] ?? '';
+if ($url !== '' && !filter_var($url, FILTER_VALIDATE_URL)) {
+    $errors[] = 'Invalid URL address.';
+}
  // Phone — filter_var has no phone validator; use preg_match
  $phone = $data['phone'] ?? '';
  if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $phone)) {
@@ -32,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  $raw = [
  'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS)
 ?? '',
+
+ 'url' => filter_input(INPUT_POST, 'url', FILTER_SANITIZE_SPECIAL_CHARS)
+?? '',
+
  'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_SPECIAL_CHARS)
 ?? '',
  'zip' => filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_SPECIAL_CHARS)
@@ -74,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 <form method="post">
  <label>Email: <input type="text" name="email"></label><br>
+ <label>URL: <input type="text" name="url"></label><br>
  <label>Phone (555-555-5555): <input type="text" name="phone"></label><br>
  <label>ZIP: <input type="text" name="zip"></label><br>
  <label>Notes:<br>
