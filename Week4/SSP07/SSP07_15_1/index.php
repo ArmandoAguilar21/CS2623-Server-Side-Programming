@@ -85,9 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <ul>
  <li>Email: <?= htmlspecialchars($result['email'], ENT_QUOTES, 'UTF-8')
 ?></li>
+<li>URL: <?= htmlspecialchars($result['url'], ENT_QUOTES, 'UTF-8') 
+?></li>
  <li>Phone: <?= htmlspecialchars($result['phone'], ENT_QUOTES, 'UTF-8')
 ?></li>
  <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8')
+?></li>
+<li>Product Code: <?= htmlspecialchars($result['product_code'], ENT_QUOTES, 'UTF-8')
 ?></li>
 <p>Message:</p>
 <div>

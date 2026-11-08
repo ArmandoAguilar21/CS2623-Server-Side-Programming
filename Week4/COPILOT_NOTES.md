@@ -15,13 +15,12 @@
 ------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-
+## SSP07 - Ex 15-1
 ## Accepted
-
-
+-When creating the product code field, I accpeted copilots auto complete after adding it to validateContact() function.
+-Accepted Copilot exception message output order.
 ## Rejected
+-Copilot suggested Custom email regex pattern, instead used filter_var() with FILTER_VALIDATE_EMAIL.
 
 ## Improved
-
-
-||
+-Reorder Exception message output. 
