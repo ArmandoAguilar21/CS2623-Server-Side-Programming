@@ -1,9 +1,8 @@
-// dashboard.php — protected page
 <?php
-require 'auth.php'; // redirects if not logged in 
 declare(strict_types=1);
 require 'auth.php'; // redirects if not logged in
 ?>
+
 <!DOCTYPE html><html lang="en">
 <head><meta charset="UTF-8"><title>Dashboard</title></head>
 <body>

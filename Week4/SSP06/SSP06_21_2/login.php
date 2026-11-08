@@ -1,5 +1,5 @@
-// login.php (self-processing)
-<?php declare(strict_types=1);
+<?php 
+declare(strict_types=1);
 session_start();
 // Simulated user store — in production this is a DB query
 $_SESSION['attempts'] = $_SESSION['attempts'] ?? 0;
