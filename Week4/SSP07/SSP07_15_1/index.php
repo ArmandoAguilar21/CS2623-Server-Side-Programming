@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?? '',
  'notes' => filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS)
 ?? '',
+'message' => filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS) ?? '',
  ];
  try {
  $result = validateContact($raw);
@@ -75,6 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?></li>
  <li>ZIP: <?= htmlspecialchars($result['zip'], ENT_QUOTES, 'UTF-8')
 ?></li>
+<p>Message:</p>
+<div>
+    <?= nl2br(htmlspecialchars($result['message'], ENT_QUOTES, 'UTF-8')) ?>
+</div>
  </ul>
 <?php endif; ?>
 <form method="post">
@@ -85,6 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <label>Notes:<br>
  <textarea name="notes" rows="4" cols="40"></textarea>
  </label><br>
+ <label>Message:<br>
+ <textarea name="message" rows="4" cols="40"></textarea>
  <button type="submit">Validate</button>
 </form>
 </body></html>
