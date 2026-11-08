@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 class ValidationException extends RuntimeException {}
+class FormatException extends validationException {}
 class DatabaseException extends RuntimeException {}
 function validateContact(array $data): array {
  $errors = [];
@@ -22,6 +23,14 @@ if ($url !== '' && !filter_var($url, FILTER_VALIDATE_URL)) {
  if (!preg_match('/^\d{5}(-\d{4})?$/', $zip)) {
  $errors[] = 'ZIP must be 5 digits or ZIP+4 (e.g. 74103 or 74103-1234).';
  }
+ // Product code — two uppercase letters followed by four digits
+$productCode = $data['product_code'] ?? '';
+
+if (!preg_match('/^[A-Z]{2}\d{4}$/', $productCode)) {
+    throw new FormatException(
+        'Product code must contain two uppercase letters followed by four digits.'
+    );
+}
  if ($errors) {
  throw new ValidationException(implode(' | ', $errors));
  }
@@ -44,9 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  'notes' => filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS)
 ?? '',
 'message' => filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS) ?? '',
- ];
+'product_code' => filter_input(INPUT_POST, 'product_code', FILTER_SANITIZE_SPECIAL_CHARS) ?? ''
+
+];
  try {
  $result = validateContact($raw);
+ } catch (FormatException $e) { // specific first
+ $errMsg = $e->getMessage();
  } catch (ValidationException $e) { // specific first
  $errMsg = $e->getMessage();
  } catch (RuntimeException $e) { // broader next
@@ -87,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <label>URL: <input type="text" name="url"></label><br>
  <label>Phone (555-555-5555): <input type="text" name="phone"></label><br>
  <label>ZIP: <input type="text" name="zip"></label><br>
+ <label>Product Code (Ex.AA1234): <input type="text" name="product_code"></label><br>
  <label>Notes:<br>
  <textarea name="notes" rows="4" cols="40"></textarea>
  </label><br>
