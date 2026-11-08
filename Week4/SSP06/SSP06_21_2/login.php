@@ -2,7 +2,8 @@
 declare(strict_types=1);
 session_start();
 // Simulated user store — in production this is a DB query
-$_SESSION['attempts'] = $_SESSION['attempts'] ?? 0;
+//$_SESSION['attempts'] = $_SESSION['attempts'] ?? 0;
+$_SESSION['attempts'] = 0;
 $users = [
  'admin' => password_hash('secret123', PASSWORD_DEFAULT),
  'jsmith' => password_hash('php4life!', PASSWORD_DEFAULT),
