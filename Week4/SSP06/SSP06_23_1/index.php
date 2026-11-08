@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require '../SSP06_21_2/auth.php';
+
 // Product catalog — simulates a DB query result
 $products = [
  1 => ['id' => 1, 'name' => 'Fender Stratocaster', 'price' => 499.99],
@@ -53,6 +54,7 @@ foreach ($_SESSION['cart'] as $pid => $qty) {
  }
 }
 ?>
+<a href="../SSP06_21_2/dashboard.php">Back to Dashboard</a>
 <!-- Product catalog display -->
 <?php foreach ($products as $p): ?>
 <div class="product">
