@@ -34,12 +34,17 @@ $ceiling = (int)ceil((float)$inputNum);
 $paddedAmount = sprintf('%10.2f', (float)$inputNum);
 // ── Date operations ────────────────────────────────────────────
 $now = new DateTime('now', $tz);
-$formatted_date = $now->format('l, F j, Y'); // e.g. Saturday, October 10,
-2026
-$formatted_time = $now->format('g:i:s A T'); // e.g. 11:45:30 PM CDT
+$formatted_date = $now->format('l, F j, Y'); // Example: Saturday, October 10, 2026
+$formatted_time = $now->format('g:i:s A T'); // Example: 11:45:30 PM CDT
 $tomorrow = (new DateTime('tomorrow', $tz))->format('Y-m-d');
-$daysUntilXmas = (new DateTime('now', $tz))->diff(new DateTime('December 25', $tz))-
->days;
+
+$christmas = new DateTime($now->format('Y') . '-12-25', $tz);
+
+if ($now > $christmas) {
+    $christmas->modify('+1 year');
+}
+
+$daysUntilXmas = $now->diff($christmas)->days;
 $yearStart = new DateTime($now->format('Y') . '-01-01', $tz);
 
 $daysSinceNewYear = date_diff($yearStart, $now)->days;
@@ -79,6 +84,7 @@ $daysSinceNewYear = date_diff($yearStart, $now)->days;
  <li>Contains "<?= htmlspecialchars($searchFor, ENT_QUOTES, 'UTF-8') ?>": <?=
 $contains ? 'Yes' : 'No' ?></li>
  <li>Starts with it: <?= $startsWith ? 'Yes' : 'No' ?></li>
+ <li>Ends with it: <?= $endsWith ? 'Yes' : 'No' ?></li>
  <?php endif; ?>
 </ul>
 <h2>Number Results</h2>

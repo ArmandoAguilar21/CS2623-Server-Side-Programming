@@ -19,3 +19,10 @@
 
 
 ## Week 5 SSP09 Ex 17-1
+## Accepted
+-- Accepted Copilot when it added the number_format with 2 decimals.
+-- The PHP is 8.0+. Checked with echo "PHP Version: " . PHP_VERSION;
+## Improved
+-- For rand() I used random_int() in order to be more secured.
+-- using DateTimeZone(America/Chicago)
+-- Simplified to str_contains() 
