@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         chmod($logFile, 0644);
         $message = 'Log cleared.';
     }
-
     // Save Entry
     else {
         $entry = filter_input(INPUT_POST, 'entry', FILTER_SANITIZE_SPECIAL_CHARS) ?? '';
@@ -41,6 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (file_exists($logFile)) {
  $fileContent = file_get_contents($logFile);
 }
+// Download Log
+if (isset($_GET['download']) && file_exists($logFile)) {
+
+    header('Content-Type: text/plain');
+    header('Content-Disposition: attachment; filename="log.txt"');
+
+    readfile($logFile);
+    exit;
+}
 // List files in data directory
 $files = array_filter(
  scandir($dataDir),
@@ -59,9 +67,18 @@ $files = array_filter(
  <label>New log entry:
  <input type="text" name="entry" maxlength="200">
  </label>
- <button type="submit">Save Entry</button>
+ <button type="submit" name="action" value="save">Save Entry</button>
+ <button type="submit" name="action" value="clear">Clear Log</button>
 </form>
+<h2>Download Log</h2>
+<a href="?download=1">Download log File</a>
 <h2>Log Contents</h2>
+<?php if (file_exists($logFile)): ?>
+    <p>
+        File Size:
+        <?= number_format(filesize($logFile)) ?> bytes
+    </p>
+<?php endif; ?>
 <?php if ($fileContent !== ''): ?>
  <pre><?= htmlspecialchars($fileContent, ENT_QUOTES, 'UTF-8') ?></pre>
 <?php else: ?>
