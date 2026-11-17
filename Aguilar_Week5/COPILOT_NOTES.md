@@ -16,3 +16,6 @@
 ## Improved
 -- Using DateTimeZone(American/Chicago) inorder to match our current time zone.
 -- Simplified fopen()/fgets() to file_get_contents() in order to have less code and same results.
+
+
+## Week 5 SSP09 Ex 17-1
